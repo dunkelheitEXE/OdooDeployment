@@ -1,10 +1,7 @@
 services:
   db:
     image: postgres:15
-    environment:
-      POSTGRES_USER: odoo
-      POSTGRES_PASSWORD: odoo
-      POSTGRES_DB: postgres
+    env_file: .env
     volumes:
       - odoo-db-data:/var/lib/postgresql/data
 
@@ -13,15 +10,12 @@ services:
     depends_on:
       - db
     ports:
-      - "8069:8069"
+      - "${ODOO_PORT}:8069"
     volumes:
       - ./custom-modules:/mnt/custom-modules
-      - odoo-filestore:/root/.local/share/Odoo
-    environment:
-      HOST: db
-      USER: odoo
-      PASSWORD: odoo
-    command: ["--dev=xml,reload,qweb", "--addons-path=/odoo/addons,/mnt/custom-modules"]
+      - ./odoo.conf:/etc/odoo/odoo.conf
+      - odoo-filestore:/var/lib/odoo
+    command: ["python3", "odoo-bin", "-c", "/etc/odoo/odoo.conf"]
 
 volumes:
   odoo-db-data:
