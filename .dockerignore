@@ -1,0 +1,10 @@
+.git
+.gitignore
+.env
+.env.bak
+custom-modules
+__pycache__/
+*.pyc
+README.md
+run.sh
+docker-compose.yml

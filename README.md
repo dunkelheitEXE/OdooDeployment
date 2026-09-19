@@ -1,23 +1,32 @@
 # Odoo deployment
 
-This repository wants to make easy starting an odoo project on the developer machine
+This repository makes it easy to start an Odoo 17 project on a developer machine.
+
+## Requirements
+
+- Docker
+- Docker Compose v2 (`docker compose`)
 
 ## Instructions
 
-- Run the next line on your terminal
+1. Create your local environment file from the template and adjust the values if needed:
 
 ```bash
-git clone "repositorio-de-modulos-custom" custom_modules/
+cp .env.bak .env
 ```
 
-- Later, give excecution permission for `run.sh`:
+2. Clone your custom modules repository inside `custom-modules/` (this is the folder that Odoo mounts):
 
 ```bash
-sudo chmod +x run.sh
+git clone "repositorio-de-modulos-custom" custom-modules/
 ```
 
-- So then, execute:
+3. Make `run.sh` executable (only needed once) and start the environment:
 
 ```bash
+chmod +x run.sh
 ./run.sh
 ```
+
+Odoo will be available at `http://localhost:${ODOO_PORT}` (`8069` by default).
+The database manager master password is defined in `odoo.conf`.

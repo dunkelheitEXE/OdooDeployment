@@ -15,7 +15,7 @@ services:
       - ./custom-modules:/mnt/custom-modules
       - ./odoo.conf:/etc/odoo/odoo.conf
       - odoo-filestore:/var/lib/odoo
-    command: ["python3", "odoo-bin", "-c", "/etc/odoo/odoo.conf"]
+    command: ["python3", "odoo-bin", "-c", "/etc/odoo/odoo.conf", "--dev=xml,reload,qweb"]
 
 volumes:
   odoo-db-data:
